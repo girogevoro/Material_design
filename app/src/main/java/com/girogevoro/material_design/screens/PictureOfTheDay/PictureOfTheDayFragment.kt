@@ -1,5 +1,7 @@
 package com.girogevoro.material_design.screens.PictureOfTheDay
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +35,24 @@ class PictureOfTheDayFragment : Fragment() {
         viewModel.getLiveData().observe(viewLifecycleOwner) { appState ->
             renderData(appState)
         }
-        viewModel.sendRequest()
+        viewModel.sendRequest(0)
+
+        binding.chipToday.setOnClickListener {
+            viewModel.sendRequest(0)
+        }
+
+        binding.chipYesterday.setOnClickListener {
+            viewModel.sendRequest(1)
+        }
+        binding.chipBeforeYesterday.setOnClickListener {
+            viewModel.sendRequest(2)
+        }
+
+        binding.inputLayout.setEndIconOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
+            })
+        }
     }
 
     private fun renderData(appState: AppState) {
@@ -44,8 +63,9 @@ class PictureOfTheDayFragment : Fragment() {
             }
             is AppState.Success -> {
                 binding.imageView.load(appState.pictureOfTheDayResponseData.url) {
-                    //TODO
                 }
+                binding.description.text = appState.pictureOfTheDayResponseData.explanation
+
             }
         }
     }
