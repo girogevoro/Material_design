@@ -12,6 +12,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.girogevoro.material_design.R
 import com.girogevoro.material_design.databinding.FragmentPictureOfTheDayBinding
@@ -95,7 +96,7 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
 
-    var isMain:Boolean = true
+    var isMain: Boolean = true
     private fun initMenu() {
         (requireActivity() as MainActivity).setSupportActionBar(binding.bottomAppBar)
 
@@ -114,6 +115,8 @@ class PictureOfTheDayFragment : Fragment() {
                         //requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container,ChipsFragment.newInstance()).addToBackStack("").commit()
                         Toast.makeText(requireContext(), "app_bar_settings", Toast.LENGTH_SHORT)
                             .show()
+                        this@PictureOfTheDayFragment.findNavController()
+                            .navigate(R.id.action_mainFragment_to_settingsFragment)
                         true
                     }
                     android.R.id.home -> {
@@ -130,16 +133,29 @@ class PictureOfTheDayFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
 
-        binding.fab.setOnClickListener{
-            if(isMain){
+        binding.fab.setOnClickListener {
+            if (isMain) {
                 binding.bottomAppBar.navigationIcon = null
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-                binding.fab.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_back_fab))
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_back_fab
+                    )
+                )
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
-            }else{
-                binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(requireContext(),R.drawable.ic_hamburger_menu_bottom_bar)
+            } else {
+                binding.bottomAppBar.navigationIcon = ContextCompat.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_hamburger_menu_bottom_bar
+                )
                 binding.bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-                binding.fab.setImageDrawable(ContextCompat.getDrawable(requireContext(),R.drawable.ic_plus_fab))
+                binding.fab.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_plus_fab
+                    )
+                )
                 binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
             }
             isMain = !isMain
@@ -167,7 +183,6 @@ class PictureOfTheDayFragment : Fragment() {
     companion object {
         fun newInstance() = PictureOfTheDayFragment()
     }
-
 
 
     override fun onDestroyView() {
