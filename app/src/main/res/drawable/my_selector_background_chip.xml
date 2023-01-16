@@ -4,9 +4,9 @@
     <item android:color="#D3B96B" android:state_enabled="false"/>
 
     <!-- Selected -->
-    <item android:color="#11C1DF" android:state_selected="true"/>
-    <item android:color="#0A03DC" android:state_pressed="true"/>
+    <item android:color="#60EF5C" android:state_selected="true"/>
+    <item android:color="#22B124" android:state_pressed="true"/>
 
     <!-- Not selected -->
-    <item android:color="#727B7E" />
+    <item android:color="?superColorPrimary" />
 </selector>

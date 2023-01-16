@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="superColorPrimary" format="reference|color" />
+    <attr name="superColorPrimaryVariant" format="reference|color" />
+    <attr name="superColorOnPrimary" format="reference|color" />
+
+    <attr name="superColorSecondary" format="reference|color" />
+    <attr name="superColorSecondaryVariant" format="reference|color" />
+    <attr name="superColorOnSecondary" format="reference|color" />
+
+</resources>

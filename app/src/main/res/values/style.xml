@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppChip.Choice" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@drawable/my_selector_background_chip</item>
+        <item name="rippleColor">#CF00F4</item>
+        <item name="android:textColor">?superColorOnPrimary</item>
+        <item name="shapeAppearanceOverlay" >@style/AppShapeAppearance.SmallComponent</item>
+    </style>
+
+    <style name="AppBottomAppBar" parent="Widget.MaterialComponents.BottomAppBar">
+        <item name="backgroundTint">?superColorPrimary</item>
+    </style>
+
+    <style name="AppShapeAppearance.SmallComponent"
+        parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+</resources>
