@@ -13,4 +13,14 @@
     <string name="green">Green</string>
     <string name="blue">Blue</string>
     <string name="yellow">Yellow</string>
+
+
+    <string name="action_settings" translatable="false">Settings</string>
+    <string name="next" translatable="false">Next</string>
+    <string name="previous" translatable="false">Previous</string>
+
+    <string name="earth" translatable="false">Earth</string>
+    <string name="mars" translatable="false">Mars</string>
+    <string name="system" translatable="false">System</string>
+    <string name="tdby">2 day ago</string>
 </resources>

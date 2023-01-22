@@ -1,4 +1,4 @@
-package com.girogevoro.material_design.screens.PictureOfTheDay
+package com.girogevoro.material_design.screens.earth.PictureOfTheDay
 
 import com.girogevoro.material_design.model.PictureOfTheDayResponseData
 
