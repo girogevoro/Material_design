@@ -1,6 +1,7 @@
-package com.girogevoro.material_design.screens.PictureOfTheDay
+package com.girogevoro.material_design.screens.earth.PictureOfTheDay
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.girogevoro.material_design.BuildConfig
@@ -19,7 +20,7 @@ class PictureOfTheDayViewModel(
     private val repositoryImpl: RepositoryImpl = RepositoryImpl()
 ) :
     ViewModel() {
-    fun getLiveData(): MutableLiveData<AppState> {
+    fun getLiveData(): LiveData<AppState> {
         //
         return liveData
     }
