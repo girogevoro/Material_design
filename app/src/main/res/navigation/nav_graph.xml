@@ -3,20 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/earthFragment">
 
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.girogevoro.material_design.screens.PictureOfTheDay.PictureOfTheDayFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_picture_of_the_day" >
-        <action
-            android:id="@+id/action_mainFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.girogevoro.material_design.screens.Settings.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/earthFragment"
+        android:name="com.girogevoro.material_design.screens.earth.EarthFragment"
+        android:label="fragment_earth"
+        tools:layout="@layout/fragment_earth" />
+    <fragment
+        android:id="@+id/systemFragment"
+        android:name="com.girogevoro.material_design.screens.SystemFragment"
+        android:label="fragment_system"
+        tools:layout="@layout/fragment_system" />
+    <fragment
+        android:id="@+id/marsFragment"
+        android:name="com.girogevoro.material_design.screens.mars.MarsFragment"
+        android:label="MarsFragment" />
 </navigation>

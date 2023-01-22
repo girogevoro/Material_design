@@ -1,18 +1,16 @@
-package com.girogevoro.material_design.screens.PictureOfTheDay
+package com.girogevoro.material_design.screens.earth.PictureOfTheDay
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import coil.load
 import com.girogevoro.material_design.R
 import com.girogevoro.material_design.databinding.FragmentPictureOfTheDayBinding
@@ -22,17 +20,22 @@ import com.girogevoro.material_design.util.TAG
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
+private const val DAY_AGO = "day_ago"
 
 class PictureOfTheDayFragment : Fragment() {
 
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding get() = _binding!!
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private var dayAgo:Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        arguments?.let {
+             dayAgo = it.getInt(DAY_AGO)
+        }
         _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
 
@@ -50,18 +53,18 @@ class PictureOfTheDayFragment : Fragment() {
         viewModel.getLiveData().observe(viewLifecycleOwner) { appState ->
             renderData(appState)
         }
-        viewModel.sendRequest(0)
+        viewModel.sendRequest(dayAgo)
 
-        binding.chipToday.setOnClickListener {
-            viewModel.sendRequest(0)
-        }
-
-        binding.chipYesterday.setOnClickListener {
-            viewModel.sendRequest(1)
-        }
-        binding.chipBeforeYesterday.setOnClickListener {
-            viewModel.sendRequest(2)
-        }
+//        binding.chipToday.setOnClickListener {
+//            viewModel.sendRequest(0)
+//        }
+//
+//        binding.chipYesterday.setOnClickListener {
+//            viewModel.sendRequest(1)
+//        }
+//        binding.chipBeforeYesterday.setOnClickListener {
+//            viewModel.sendRequest(2)
+//        }
 
         binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
@@ -107,23 +110,23 @@ class PictureOfTheDayFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
-                    R.id.app_bar_fav -> {
-                        Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT).show()
-                        true
-                    }
-                    R.id.app_bar_settings -> {
-                        //requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container,ChipsFragment.newInstance()).addToBackStack("").commit()
-                        Toast.makeText(requireContext(), "app_bar_settings", Toast.LENGTH_SHORT)
-                            .show()
-                        this@PictureOfTheDayFragment.findNavController()
-                            .navigate(R.id.action_mainFragment_to_settingsFragment)
-                        true
-                    }
-                    android.R.id.home -> {
-                        Toast.makeText(requireContext(), "home", Toast.LENGTH_SHORT).show()
-                        //BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager,"")
-                        true
-                    }
+//                    R.id.app_bar_fav -> {
+//                        Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT).show()
+//                        true
+//                    }
+//                    R.id.app_bar_settings -> {
+//                        //requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container,ChipsFragment.newInstance()).addToBackStack("").commit()
+//                        Toast.makeText(requireContext(), "app_bar_settings", Toast.LENGTH_SHORT)
+//                            .show()
+//                        this@PictureOfTheDayFragment.findNavController()
+//                            .navigate(R.id.action_mainFragment_to_settingsFragment)
+//                        true
+//                    }
+//                    android.R.id.home -> {
+//                        Toast.makeText(requireContext(), "home", Toast.LENGTH_SHORT).show()
+//                        //BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager,"")
+//                        true
+//                    }
                     else -> {
                         false
                     }
@@ -180,13 +183,18 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
-    companion object {
-        fun newInstance() = PictureOfTheDayFragment()
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+    companion object {
+        fun newInstance(dayAgo: Int) = PictureOfTheDayFragment().apply {
+            arguments = Bundle().apply {
+                putInt(DAY_AGO, dayAgo)
+            }
+        }
+    }
+
 }
