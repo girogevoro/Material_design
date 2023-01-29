@@ -5,12 +5,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import coil.load
 import com.girogevoro.material_design.R
 import com.girogevoro.material_design.databinding.FragmentPictureOfTheDayBinding
@@ -55,16 +57,16 @@ class PictureOfTheDayFragment : Fragment() {
         }
         viewModel.sendRequest(dayAgo)
 
-//        binding.chipToday.setOnClickListener {
-//            viewModel.sendRequest(0)
-//        }
-//
-//        binding.chipYesterday.setOnClickListener {
-//            viewModel.sendRequest(1)
-//        }
-//        binding.chipBeforeYesterday.setOnClickListener {
-//            viewModel.sendRequest(2)
-//        }
+        binding.chipToday.setOnClickListener {
+            viewModel.sendRequest(0)
+        }
+
+        binding.chipYesterday.setOnClickListener {
+            viewModel.sendRequest(1)
+        }
+        binding.chipBeforeYesterday.setOnClickListener {
+            viewModel.sendRequest(2)
+        }
 
         binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
@@ -110,23 +112,23 @@ class PictureOfTheDayFragment : Fragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
-//                    R.id.app_bar_fav -> {
-//                        Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT).show()
-//                        true
-//                    }
-//                    R.id.app_bar_settings -> {
-//                        //requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container,ChipsFragment.newInstance()).addToBackStack("").commit()
-//                        Toast.makeText(requireContext(), "app_bar_settings", Toast.LENGTH_SHORT)
-//                            .show()
-//                        this@PictureOfTheDayFragment.findNavController()
-//                            .navigate(R.id.action_mainFragment_to_settingsFragment)
-//                        true
-//                    }
-//                    android.R.id.home -> {
-//                        Toast.makeText(requireContext(), "home", Toast.LENGTH_SHORT).show()
-//                        //BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager,"")
-//                        true
-//                    }
+                    R.id.app_bar_fav -> {
+                        Toast.makeText(requireContext(), "app_bar_fav", Toast.LENGTH_SHORT).show()
+                        true
+                    }
+                    R.id.app_bar_settings -> {
+                        //requireActivity().supportFragmentManager.beginTransaction().replace(R.id.container,ChipsFragment.newInstance()).addToBackStack("").commit()
+                        Toast.makeText(requireContext(), "app_bar_settings", Toast.LENGTH_SHORT)
+                            .show()
+                        this@PictureOfTheDayFragment.findNavController()
+                            .navigate(R.id.settingsFragment)
+                        true
+                    }
+                    android.R.id.home -> {
+                        Toast.makeText(requireContext(), "home", Toast.LENGTH_SHORT).show()
+                        //BottomNavigationDrawerFragment().show(requireActivity().supportFragmentManager,"")
+                        true
+                    }
                     else -> {
                         false
                     }
@@ -178,6 +180,11 @@ class PictureOfTheDayFragment : Fragment() {
                     appState.pictureOfTheDayResponseData.title
                 binding.included.bottomSheetDescription.text =
                     appState.pictureOfTheDayResponseData.explanation
+                binding.copyrightValue.text = appState.pictureOfTheDayResponseData.copyright
+                binding.dateValue.text = appState.pictureOfTheDayResponseData.date
+                binding.mediaTypeValue.text = appState.pictureOfTheDayResponseData.mediaType
+
+                binding.url.text = appState.pictureOfTheDayResponseData.url
 
             }
         }
