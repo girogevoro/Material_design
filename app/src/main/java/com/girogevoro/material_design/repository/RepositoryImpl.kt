@@ -6,7 +6,6 @@ import com.girogevoro.material_design.util.NASA_BASE_URL
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 class RepositoryImpl : Repository {
 

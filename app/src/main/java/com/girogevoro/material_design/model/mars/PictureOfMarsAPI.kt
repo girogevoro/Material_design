@@ -1,7 +1,5 @@
 package com.girogevoro.material_design.model.mars
 
-import com.girogevoro.material_design.model.PictureOfTheDayAPI
-import com.girogevoro.material_design.model.PictureOfTheDayResponseData
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

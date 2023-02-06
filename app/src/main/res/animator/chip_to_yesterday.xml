@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_pressed="true">
+        <set android:ordering="together">
+            <objectAnimator
+                android:duration="200"
+                android:interpolator="@android:interpolator/linear"
+                android:propertyName="elevation"
+                android:valueTo="12dp"
+                android:valueType="floatType" />
+
+            <objectAnimator
+                android:duration="2000"
+                android:propertyName="rotation"
+                android:valueTo="45"
+                android:valueType="floatType" />
+
+            <objectAnimator
+                android:duration="200"
+                android:propertyName="y"
+                android:valueTo="-10"
+                android:valueType="floatType" />
+
+            <objectAnimator
+                android:duration="250"
+                android:interpolator="@android:anim/decelerate_interpolator"
+                android:repeatCount="1"
+                >
+                <propertyValuesHolder
+                    android:propertyName="scaleX"
+                    android:valueFrom="1"
+                    android:valueTo="2" />
+                <propertyValuesHolder
+                    android:propertyName="scaleY"
+                    android:valueFrom="1"
+                    android:valueTo="2" />
+            </objectAnimator>
+
+
+        </set>
+    </item>
+
+
+    <item>
+
+        <set>
+            <set android:ordering="sequentially">
+                <objectAnimator
+                    android:duration="200"
+                    android:propertyName="elevation"
+                    android:valueTo="0dp"
+                    android:valueType="floatType" />
+                <objectAnimator
+                    android:duration="2000"
+                    android:propertyName="rotation"
+                    android:valueTo="0"
+                    android:valueType="floatType" />
+
+                <objectAnimator
+                    android:duration="200"
+                    android:propertyName="y"
+                    android:valueTo="0"
+                    android:valueType="floatType" />
+            </set>
+
+            <objectAnimator
+                android:duration="250"
+                android:interpolator="@android:anim/decelerate_interpolator"
+                >
+                <propertyValuesHolder
+                    android:propertyName="scaleX"
+                    android:valueTo="1" />
+                <propertyValuesHolder
+                    android:propertyName="scaleY"
+                    android:valueTo="1" />
+            </objectAnimator>
+
+        </set>
+
+
+    </item>
+</selector>
