@@ -11,6 +11,8 @@ const val NASA_BASE_URL = "https://api.nasa.gov/"
 @Suppress("SimplifyBooleanWithConstants")
 val DEBUG = BuildConfig.DEBUG && true
 
+const val TIME_ANIMATION = 300L
+
 
 class Const {
 }

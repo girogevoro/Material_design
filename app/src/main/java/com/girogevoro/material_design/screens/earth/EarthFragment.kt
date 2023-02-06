@@ -1,10 +1,10 @@
 package com.girogevoro.material_design.screens.earth
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.girogevoro.material_design.R
 import com.girogevoro.material_design.databinding.FragmentEarthBinding
 import com.google.android.material.tabs.TabLayout
@@ -24,7 +24,7 @@ class EarthFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentEarthBinding.inflate(inflater, container, false)
         return binding.root
@@ -34,6 +34,7 @@ class EarthFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewPager.adapter = ViewPager2AdapterForEarthFragment(this)
         bindTabLayout()
+
     }
 
     private fun bindTabLayout() {

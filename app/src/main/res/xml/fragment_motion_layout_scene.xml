@@ -31,7 +31,8 @@
     <Transition
         app:constraintSetEnd="@id/end"
         app:constraintSetStart="@+id/start"
-        app:duration="1000">
+        app:duration="1000"
+        app:motionInterpolator="overshoot">
 
         <OnClick app:targetId="@id/input_layout" />
     </Transition>

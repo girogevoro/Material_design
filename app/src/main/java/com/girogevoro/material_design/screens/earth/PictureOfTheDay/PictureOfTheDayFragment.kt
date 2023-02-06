@@ -1,5 +1,6 @@
 package com.girogevoro.material_design.screens.earth.PictureOfTheDay
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -19,6 +20,7 @@ import com.girogevoro.material_design.databinding.FragmentPictureOfTheDayBinding
 import com.girogevoro.material_design.screens.MainActivity
 import com.girogevoro.material_design.util.DEBUG
 import com.girogevoro.material_design.util.TAG
+import com.girogevoro.material_design.util.TIME_ANIMATION
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
@@ -98,6 +100,18 @@ class PictureOfTheDayFragment : Fragment() {
                 }
             }
         })
+
+        animateChipToDay()
+
+    }
+
+    private fun animateChipToDay() {
+        binding.chipToday.setOnClickListener{
+            ObjectAnimator.ofFloat(it,
+                View.ROTATION,
+                0f,
+                360f).setDuration(TIME_ANIMATION).start()
+        }
     }
 
 

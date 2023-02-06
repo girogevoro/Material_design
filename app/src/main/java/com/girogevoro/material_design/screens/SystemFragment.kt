@@ -1,12 +1,11 @@
 package com.girogevoro.material_design.screens
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.girogevoro.material_design.R
-
 
 
 class SystemFragment : Fragment() {
@@ -26,7 +25,7 @@ class SystemFragment : Fragment() {
     companion object {
 
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance() =
             SystemFragment()
     }
 }
