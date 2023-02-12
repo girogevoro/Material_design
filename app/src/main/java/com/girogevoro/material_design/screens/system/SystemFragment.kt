@@ -1,4 +1,4 @@
-package com.girogevoro.material_design.screens
+package com.girogevoro.material_design.screens.system
 
 import android.os.Bundle
 import android.view.LayoutInflater
