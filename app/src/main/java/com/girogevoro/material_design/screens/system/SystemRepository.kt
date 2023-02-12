@@ -4,10 +4,10 @@ class SystemRepository(private val list: MutableList<DataUser>) {
     init {
         list.addAll(
             listOf(
-                DataUser.NoteTitle(-3, "Title"),
-                DataUser.NoteUser(0, "One", "First"),
-                DataUser.NoteUser(1, "Two", "Second"),
-                DataUser.NoteUser(2, "Three", "Third")
+                DataUser.Title(-3, "Title"),
+                DataUser.Note(0, "One", "First"),
+                DataUser.Note(1, "Two", "Second"),
+                DataUser.Note(2, "Three", "Third")
             )
         )
     }
