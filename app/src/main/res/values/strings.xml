@@ -23,4 +23,7 @@
     <string name="mars" translatable="false">Mars</string>
     <string name="system" translatable="false">System</string>
     <string name="tdby">2 day ago</string>
+    <string name="help">help</string>
+    <string name="note">note</string>
+    <string name="input">input</string>
 </resources>

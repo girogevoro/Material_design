@@ -17,19 +17,26 @@ class SystemRepository(private val list: MutableList<DataUser>) {
     }
 
     fun move(positionOld: Int, positionNew: Int) {
-        list[positionOld].let {
-            list.removeAt(positionOld)
-            list.add(positionNew, it)
+        if (isRightPosition(positionOld) && isRightPosition(positionNew)) {
+            list[positionOld].let {
+                list.removeAt(positionOld)
+                list.add(positionNew, it)
+            }
         }
     }
 
     fun remove(position: Int) {
-        list.removeAt(position)
+        if(isRightPosition(position)){
+            list.removeAt(position)
+        }
     }
 
     fun getList(): List<DataUser> {
         return list.toList()
     }
 
+    private fun isRightPosition(position: Int): Boolean {
+        return position >= 0 && list.size > position
+    }
 
 }
