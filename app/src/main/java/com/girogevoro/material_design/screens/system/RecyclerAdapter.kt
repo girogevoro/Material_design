@@ -6,9 +6,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.girogevoro.material_design.databinding.FragmentSystemRecyclerNoteBinding
 import com.girogevoro.material_design.databinding.FragmentSystemRecyclerTitleBinding
+import java.util.function.BiConsumer
+import java.util.function.Consumer
 
-class RecyclerAdapter(private var list: List<DataUser>) :
+class RecyclerAdapter(
+    private var list: List<DataUser>,
+) :
     RecyclerView.Adapter<RecyclerAdapter.BaseViewHolder>() {
+
+    var onConsumerActionNote: BiConsumer<Int, TypeActionNote>? = null
+
+    fun setList(listNew: List<DataUser>) {
+        list = listNew
+    }
 
     override fun getItemViewType(position: Int): Int {
         return list[position].type
@@ -39,11 +49,20 @@ class RecyclerAdapter(private var list: List<DataUser>) :
         return list.size
     }
 
-    class NoteViewHolder(private val binding: FragmentSystemRecyclerNoteBinding) :
+    inner class NoteViewHolder(private val binding: FragmentSystemRecyclerNoteBinding) :
         BaseViewHolder(binding.root) {
         override fun bind(dataUser: DataUser) {
             (dataUser as? DataUser.Note)?.also {
                 binding.note.text = it.description
+                binding.moveItemUp.setOnClickListener(){
+                    onConsumerActionNote?.accept(layoutPosition, TypeActionNote.UP)
+                }
+                binding.moveItemDown.setOnClickListener(){
+                    onConsumerActionNote?.accept(layoutPosition,TypeActionNote.DOWN)
+                }
+                binding.removeItemImageView.setOnClickListener(){
+                    onConsumerActionNote?.accept(layoutPosition,TypeActionNote.REMOVE)
+                }
             }
         }
     }
@@ -60,5 +79,11 @@ class RecyclerAdapter(private var list: List<DataUser>) :
     abstract class BaseViewHolder(view: View) :
         RecyclerView.ViewHolder(view) {
         abstract fun bind(dataUser: DataUser)
+    }
+
+    enum class TypeActionNote{
+        UP,
+        DOWN,
+        REMOVE
     }
 }
