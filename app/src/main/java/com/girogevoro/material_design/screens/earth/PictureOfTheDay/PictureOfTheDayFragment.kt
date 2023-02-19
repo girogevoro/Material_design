@@ -2,8 +2,15 @@ package com.girogevoro.material_design.screens.earth.PictureOfTheDay
 
 import android.animation.ObjectAnimator
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.BackgroundColorSpan
+import android.text.style.DynamicDrawableSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.ImageSpan
 import android.util.Log
 import android.view.*
 import android.widget.Toast
@@ -31,14 +38,14 @@ class PictureOfTheDayFragment : Fragment() {
     private var _binding: FragmentPictureOfTheDayBinding? = null
     private val binding get() = _binding!!
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
-    private var dayAgo:Int = 0
+    private var dayAgo: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         arguments?.let {
-             dayAgo = it.getInt(DAY_AGO)
+            dayAgo = it.getInt(DAY_AGO)
         }
         _binding = FragmentPictureOfTheDayBinding.inflate(inflater, container, false)
         return binding.root
@@ -106,11 +113,13 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private fun animateChipToDay() {
-        binding.chipToday.setOnClickListener{
-            ObjectAnimator.ofFloat(it,
+        binding.chipToday.setOnClickListener {
+            ObjectAnimator.ofFloat(
+                it,
                 View.ROTATION,
                 0f,
-                360f).setDuration(TIME_ANIMATION).start()
+                360f
+            ).setDuration(TIME_ANIMATION).start()
         }
     }
 
@@ -190,10 +199,29 @@ class PictureOfTheDayFragment : Fragment() {
             is AppState.Success -> {
                 binding.imageView.load(appState.pictureOfTheDayResponseData.url) {
                 }
-                binding.included.bottomSheetDescriptionHeader.text =
-                    appState.pictureOfTheDayResponseData.title
-                binding.included.bottomSheetDescription.text =
-                    appState.pictureOfTheDayResponseData.explanation
+
+                val spannableStringTitle =
+                    SpannableString(appState.pictureOfTheDayResponseData.title)
+                val color = ContextCompat.getColor(
+                    requireContext(),
+                    androidx.appcompat.R.color.abc_hint_foreground_material_light
+                )
+                setTextBackgroundColor(spannableStringTitle, color)
+                binding.included.bottomSheetDescriptionHeader.apply {
+                    text = spannableStringTitle
+                    typeface =
+                        Typeface.createFromAsset(requireActivity().assets, "Morice-Bejar.ttf")
+                }
+
+
+                val spannableStringDescription =
+                    SpannableString(appState.pictureOfTheDayResponseData.explanation)
+
+                setTextColor(spannableStringDescription)
+                setTextImage(spannableStringDescription)
+
+                binding.included.bottomSheetDescription.text = spannableStringDescription
+
                 binding.copyrightValue.text = appState.pictureOfTheDayResponseData.copyright
                 binding.dateValue.text = appState.pictureOfTheDayResponseData.date
                 binding.mediaTypeValue.text = appState.pictureOfTheDayResponseData.mediaType
@@ -202,6 +230,51 @@ class PictureOfTheDayFragment : Fragment() {
 
             }
         }
+    }
+
+    private fun setTextColor(spannableString: SpannableString) {
+        val color = arrayOf<Int>(
+            0xFF998888.toInt(),
+            0xFF779977.toInt(),
+            0xFF666699.toInt(),
+            0xFFCC5555.toInt(),
+            0xFF44CC44.toInt(),
+            0xFF5555CC.toInt(),
+            0xFFFF6666.toInt(),
+            0xFF77FF77.toInt()
+        )
+
+        for (i in spannableString.indices) {
+            spannableString.setSpan(
+                ForegroundColorSpan(color[i % color.size]),
+                i,
+                i + 1,
+                0
+            )
+        }
+    }
+
+
+    private fun setTextImage(spannableString: SpannableString) {
+        for (i in spannableString.indices) {
+            if (spannableString[i] == 'o') {
+                val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_earth)!!
+                drawable.setBounds(0, 0, 32, 32)
+                spannableString.setSpan(
+                    ImageSpan(
+                        drawable,
+                        DynamicDrawableSpan.ALIGN_BASELINE
+                    ),
+                    i,
+                    i + 1,
+                    Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+                )
+            }
+        }
+    }
+
+    private fun setTextBackgroundColor(spannableString: SpannableString, color: Int) {
+        spannableString.setSpan(BackgroundColorSpan(color), 0, spannableString.length, 0)
     }
 
 
