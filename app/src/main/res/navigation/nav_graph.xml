@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_earth" />
     <fragment
         android:id="@+id/systemFragment"
-        android:name="com.girogevoro.material_design.screens.SystemFragment"
+        android:name="com.girogevoro.material_design.screens.system.SystemFragment"
         android:label="fragment_system"
         tools:layout="@layout/fragment_system" />
     <fragment
