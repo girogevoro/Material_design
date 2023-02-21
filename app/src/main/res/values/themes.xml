@@ -22,6 +22,10 @@
 
     </style>
 
+    <style name = "AppThemeSplash" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash_background_drawable</item>
+    </style>
+
     <style name="AppThemeBlue" parent="AppTheme">
         <item name="superColorPrimary">#033571</item>
         <item name="superColorPrimaryVariant">#4577DC</item>
