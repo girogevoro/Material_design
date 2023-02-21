@@ -7,28 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.girogevoro.material_design.R
 import com.girogevoro.material_design.databinding.FragmentEarthBinding
+import com.girogevoro.material_design.util.screens.ViewBindingFragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 
-class EarthFragment : Fragment() {
-
-    private var _binding: FragmentEarthBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        // Inflate the layout for this fragment
-        _binding = FragmentEarthBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+class EarthFragment : ViewBindingFragment<FragmentEarthBinding>(FragmentEarthBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
