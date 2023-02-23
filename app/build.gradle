@@ -29,7 +29,7 @@ android {
         def nasaApiKey = properties.getProperty("NASA_API_KEY", "")
         it.buildConfigField "String", "NASA_API_KEY", nasaApiKey
     }
-    
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -71,5 +71,8 @@ dependencies {
     //Coil image download
     implementation 'io.coil-kt:coil:1.4.0'
 
+    // navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
+    implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
 
 }
